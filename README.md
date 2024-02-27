@@ -21,12 +21,15 @@ A simple, correct, efficient [interval tree](https://en.wikipedia.org/wiki/Inter
 ## Motivation
 
 At the time of writing, no interval tree implementations exist for Java
-that are:
+that have all of the following properties:
 
 * Simple, readable, and well-commented.
 * Not part of an existing massive, poor-quality library such as Guava.
 * Heavily tested with an exhaustive test suite.
 * Liberally licensed.
+* Published to Maven Central.
+* [JPMS](https://en.wikipedia.org/wiki/Java_Platform_Module_System)-ready.
+* [OSGi](https://www.osgi.org/)-ready.
 
 The `abstand` package provides a generic interval tree implementation based
 on an [AVL tree](https://en.wikipedia.org/wiki/AVL_tree) that aims to meet
