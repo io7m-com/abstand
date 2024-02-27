@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<div xmlns="http://www.w3.org/1999/xhtml">
+  <h3>User Documentation</h3>
+  <p>
+    Create a tree and add intervals to it. It otherwise acts as sorted set.
+  </p>
+  <pre>
+final var t = IntervalTree.&lt;BigInteger>create();
+t.add(IntervalB.of(20, 30));
+t.add(IntervalB.of(25, 30));
+  </pre>
+</div>
