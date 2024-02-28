@@ -39,6 +39,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -47,6 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -632,5 +634,17 @@ public abstract class IntervalTreeContract<
     final var a0 = unique.toArray(ta0s);
     final var a1 = this.tree.toArray(ta1s);
     assertArrayEquals(a0, a1);
+  }
+
+  @Property
+  public void testChanges(
+    final @ForAll IntervalTreeChangeType c0,
+    final @ForAll IntervalTreeChangeType c1)
+  {
+    if (Objects.equals(c0, c1)) {
+      assertEquals(c0.toString(), c1.toString());
+    } else {
+      assertNotEquals(c0.toString(), c1.toString());
+    }
   }
 }

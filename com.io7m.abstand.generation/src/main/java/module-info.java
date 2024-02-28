@@ -19,6 +19,7 @@ import com.io7m.abstand.generation.IntervalArbB;
 import com.io7m.abstand.generation.IntervalArbD;
 import com.io7m.abstand.generation.IntervalArbI;
 import com.io7m.abstand.generation.IntervalArbL;
+import com.io7m.abstand.generation.IntervalArbTreeChange;
 import net.jqwik.api.providers.ArbitraryProvider;
 
 /**
@@ -37,9 +38,10 @@ module com.io7m.abstand.generation
 
   exports com.io7m.abstand.generation;
 
-  provides ArbitraryProvider
-    with IntervalArbB,
-      IntervalArbL,
-      IntervalArbI,
-      IntervalArbD;
+  provides ArbitraryProvider with
+    IntervalArbTreeChange,
+    IntervalArbB,
+    IntervalArbL,
+    IntervalArbI,
+    IntervalArbD;
 }
