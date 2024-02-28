@@ -34,7 +34,7 @@ var o = t.overlapping(IntervalL.of(26, 28));
  // o == [[20, 30], [25, 30]];
 ```
 
-Interval trees contain values of type `IntervalTreeType<S>` for some scalar
+Interval trees contain values of type `IntervalType<S>` for some scalar
 type `S`. The following implementations are provided:
 
 |Type       |Description                             |
