@@ -19,6 +19,7 @@ package com.io7m.abstand.core;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -134,6 +135,18 @@ public interface IntervalTreeType<S extends Comparable<S>>
    */
 
   boolean find(IntervalType<S> value);
+
+  /**
+   * @return The minimum interval in the set, if any
+   */
+
+  Optional<IntervalType<S>> minimum();
+
+  /**
+   * @return The maximum interval in the set, if any
+   */
+
+  Optional<IntervalType<S>> maximum();
 
   /**
    * @param interval The interval

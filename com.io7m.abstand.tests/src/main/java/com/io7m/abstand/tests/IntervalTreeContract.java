@@ -40,6 +40,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -646,5 +647,83 @@ public abstract class IntervalTreeContract<
     } else {
       assertNotEquals(c0.toString(), c1.toString());
     }
+  }
+
+  /**
+   * The non-empty tree always has a minimum element.
+   *
+   * @param xs The elements
+   */
+
+  @Property
+  public void testMinimumNonEmpty(
+    final @ForAll("intervals") List<I> xs)
+  {
+    Assumptions.assumeFalse(xs.isEmpty());
+
+    this.tree = this.create();
+    this.tree.setChangeListener(this::logChange);
+
+    final var ordered = new TreeSet<>(xs);
+    this.tree.addAll(ordered);
+
+    assertEquals(
+      Optional.of(ordered.first()),
+      this.tree.minimum()
+    );
+  }
+
+  /**
+   * The non-empty tree always has a maximum element.
+   *
+   * @param xs The elements
+   */
+
+  @Property
+  public void testMaximumNonEmpty(
+    final @ForAll("intervals") List<I> xs)
+  {
+    Assumptions.assumeFalse(xs.isEmpty());
+
+    this.tree = this.create();
+    this.tree.setChangeListener(this::logChange);
+
+    final var ordered = new TreeSet<>(xs);
+    this.tree.addAll(ordered);
+
+    assertEquals(
+      Optional.of(ordered.last()),
+      this.tree.maximum()
+    );
+  }
+
+  /**
+   * The empty tree never has a minimum element.
+   */
+
+  @Test
+  public void testMinimumEmpty()
+  {
+    this.tree = this.create();
+
+    assertEquals(
+      Optional.empty(),
+      this.tree.minimum()
+    );
+  }
+
+  /**
+   * The empty tree never has a maximum element.
+   */
+
+  @Test
+  public void testMaximumEmpty()
+  {
+    this.tree = this.create();
+
+    assertEquals(
+      Optional.empty(),
+      this.tree.maximum()
+    );
   }
 }

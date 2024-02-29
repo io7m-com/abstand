@@ -34,6 +34,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -459,6 +460,46 @@ public final class IntervalTree<S extends Comparable<S>>
   {
     Objects.requireNonNull(value, "value");
     return this.findAt(this.root, value);
+  }
+
+  @Override
+  public Optional<IntervalType<S>> minimum()
+  {
+    return this.minimumAt(this.root);
+  }
+
+  private Optional<IntervalType<S>> minimumAt(
+    final Node<S> current)
+  {
+    if (current == null) {
+      return Optional.empty();
+    }
+
+    if (current.left == null) {
+      return Optional.of(current.interval);
+    }
+
+    return this.minimumAt(current.left);
+  }
+
+  @Override
+  public Optional<IntervalType<S>> maximum()
+  {
+    return this.maximumAt(this.root);
+  }
+
+  private Optional<IntervalType<S>> maximumAt(
+    final Node<S> current)
+  {
+    if (current == null) {
+      return Optional.empty();
+    }
+
+    if (current.right == null) {
+      return Optional.of(current.interval);
+    }
+
+    return this.maximumAt(current.right);
   }
 
   private boolean findAt(
