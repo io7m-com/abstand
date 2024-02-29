@@ -1,0 +1,57 @@
+
+## Abstand
+
+A simple, correct, efficient [interval tree](https://en.wikipedia.org/wiki/Interval_tree) implementation.
+
+## Motivation
+
+At the time of writing, no interval tree implementations exist for Java
+that have all of the following properties:
+
+* Simple, readable, and well-commented.
+* Not part of an existing massive, poor-quality library such as Guava.
+* Heavily tested with an exhaustive test suite.
+* Liberally licensed.
+* Published to Maven Central.
+* [JPMS](https://en.wikipedia.org/wiki/Java_Platform_Module_System)-ready.
+* [OSGi](https://www.osgi.org/)-ready.
+
+The `abstand` package provides a generic interval tree implementation based
+on an [AVL tree](https://en.wikipedia.org/wiki/AVL_tree) that aims to meet
+all of the above requirements.
+
+## Usage
+
+Implementations of the `IntervalTreeType` are implementations of `Set` that
+also allow for overlapping queries:
+
+```
+var t = IntervalTree.<Long>create();
+t.add(IntervalL.of(20, 30));
+t.add(IntervalL.of(25, 30));
+
+var o = t.overlapping(IntervalL.of(26, 28));
+ // o == [[20, 30], [25, 30]];
+```
+
+Interval trees contain values of type `IntervalType<S>` for some scalar
+type `S`. The following implementations are provided:
+
+|Type       |Description                             |
+|-----------|----------------------------------------|
+|`IntervalD`|Intervals with `double`-typed values    |
+|`IntervalB`|Intervals with `BigInteger`-typed values|
+|`IntervalL`|Intervals with `long`-typed values      |
+|`IntervalI`|Intervals with `int`-typed values       |
+
+## Notes
+
+Credit is given to someone named "John Hargrove" who published what appears to
+be the only comprehensible explanation of AVL tree rotations online. All other
+texts appear to contain subtle mistakes, or miss the exact conditions required
+for each rotation type to be applicable.
+
+He originally published a [document](https://www.cise.ufl.edu/~nemo/cop3530/AVL-Tree-Rotations.pdf)
+online, but I've included a copy in the [references](references/AVL-Tree-Rotations.pdf)
+subdirectory as I do not trust random files published in the home directories
+of computer science students on university servers to stay accessible.
