@@ -150,14 +150,14 @@ public final class IntervalTree<S extends Comparable<S>>
     }
 
     final Stream<IntervalType<S>> leftStream;
-    if (current.left != null && current.left.maximum.overlaps(interval)) {
+    if (current.left != null && current.left.maximum.upper().compareTo(interval.lower()) >= 0) {
       leftStream = this.overlappingAt(current.left, interval);
     } else {
       leftStream = Stream.empty();
     }
 
     final Stream<IntervalType<S>> rightStream;
-    if (current.right != null && current.right.maximum.overlaps(interval)) {
+    if (current.right != null) {
       rightStream = this.overlappingAt(current.right, interval);
     } else {
       rightStream = Stream.empty();

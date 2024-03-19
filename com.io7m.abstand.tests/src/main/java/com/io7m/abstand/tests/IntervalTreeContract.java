@@ -16,6 +16,7 @@
 
 package com.io7m.abstand.tests;
 
+import com.io7m.abstand.core.IntervalL;
 import com.io7m.abstand.core.IntervalTreeChangeType;
 import com.io7m.abstand.core.IntervalTreeDebuggableType;
 import com.io7m.abstand.core.IntervalTreeType;
@@ -103,7 +104,7 @@ public abstract class IntervalTreeContract<
    */
 
   @Test
-  public void testSizeEmpty()
+  public final void testSizeEmpty()
   {
     this.tree = this.create();
     assertEquals(0, this.tree.size());
@@ -115,7 +116,7 @@ public abstract class IntervalTreeContract<
    */
 
   @Test
-  public void testSizeInsertOne()
+  public final void testSizeInsertOne()
   {
     this.tree = this.create();
     this.tree.setChangeListener(this::logChange);
@@ -133,7 +134,7 @@ public abstract class IntervalTreeContract<
    */
 
   @Property
-  public void testSizeInsertMany(
+  public final void testSizeInsertMany(
     final @ForAll("intervals") List<I> xs)
   {
     this.tree = this.create();
@@ -161,7 +162,7 @@ public abstract class IntervalTreeContract<
    */
 
   @Property
-  public void testInsertFind(
+  public final void testInsertFind(
     final @ForAll("intervals") List<I> xs,
     final @ForAll("intervals") List<I> ys)
   {
@@ -186,7 +187,7 @@ public abstract class IntervalTreeContract<
    */
 
   @Test
-  public void testOverlapsSpecific()
+  public final void testOverlapsSpecific()
   {
     this.tree = this.create();
     this.tree.setChangeListener(this::logChange);
@@ -205,7 +206,7 @@ public abstract class IntervalTreeContract<
     assertEquals(4, this.tree.size());
 
     {
-      final var e = List.of(i0);
+      final var e = List.of(i0, i3);
       final var r = List.copyOf(this.tree.overlapping(i0));
       assertAll(
         r.stream()
@@ -265,7 +266,7 @@ public abstract class IntervalTreeContract<
    */
 
   @Property
-  public void testOverlapsForall(
+  public final void testOverlapsForall(
     final @ForAll("intervals") List<I> xs)
   {
     this.tree = this.create();
@@ -280,6 +281,8 @@ public abstract class IntervalTreeContract<
 
     for (final var x : inserted) {
       final var r = this.tree.overlapping(x);
+      assertFalse(r.isEmpty());
+
       assertAll(
         r.stream()
           .map(s -> (Executable) () -> {
@@ -297,7 +300,7 @@ public abstract class IntervalTreeContract<
    */
 
   @Property
-  public void testOverlapsEmpty(
+  public final void testOverlapsEmpty(
     final @ForAll("intervals") List<I> xs)
   {
     this.tree = this.create();
@@ -316,7 +319,7 @@ public abstract class IntervalTreeContract<
    */
 
   @Property
-  public void testRemoveMany(
+  public final void testRemoveMany(
     final @ForAll("intervals") List<I> xs)
   {
     this.tree = this.create();
@@ -352,7 +355,7 @@ public abstract class IntervalTreeContract<
    */
 
   @Test
-  public void testRemoveSpecific0()
+  public final void testRemoveSpecific0()
   {
     this.tree = this.create();
     this.tree.setChangeListener(this::logChange);
@@ -371,7 +374,7 @@ public abstract class IntervalTreeContract<
    */
 
   @Test
-  public void testRemoveSpecific1()
+  public final void testRemoveSpecific1()
   {
     this.tree = this.create();
     this.tree.setChangeListener(this::logChange);
@@ -396,7 +399,7 @@ public abstract class IntervalTreeContract<
    */
 
   @Test
-  public void testRemoveSpecific2()
+  public final void testRemoveSpecific2()
   {
     final var i0 =
       this.interval(0L, 0L);
@@ -431,7 +434,7 @@ public abstract class IntervalTreeContract<
    */
 
   @Property
-  public void testCollectionOrdered(
+  public final void testCollectionOrdered(
     final @ForAll("intervals") List<I> xs)
   {
     final var unique = new TreeSet<>(xs);
@@ -453,7 +456,7 @@ public abstract class IntervalTreeContract<
    */
 
   @Property
-  public void testCollectionContainsAll(
+  public final void testCollectionContainsAll(
     final @ForAll("intervals") List<I> xs)
   {
     final var unique = new TreeSet<>(xs);
@@ -471,7 +474,7 @@ public abstract class IntervalTreeContract<
    */
 
   @Property
-  public void testCollectionAddAllContainsAll(
+  public final void testCollectionAddAllContainsAll(
     final @ForAll("intervals") List<I> xs)
   {
     Assumptions.assumeTrue(!xs.isEmpty());
@@ -493,7 +496,7 @@ public abstract class IntervalTreeContract<
    */
 
   @Property
-  public void testCollectionClear(
+  public final void testCollectionClear(
     final @ForAll("intervals") List<I> xs)
   {
     final var unique = new TreeSet<>(xs);
@@ -512,7 +515,7 @@ public abstract class IntervalTreeContract<
    */
 
   @Property
-  public void testCollectionRetainAll(
+  public final void testCollectionRetainAll(
     final @ForAll("intervals") List<I> xs,
     final @ForAll("intervals") List<I> ys)
   {
@@ -537,7 +540,7 @@ public abstract class IntervalTreeContract<
    */
 
   @Property
-  public void testCollectionToArray0(
+  public final void testCollectionToArray0(
     final @ForAll("intervals") List<I> xs)
   {
     final var unique = new TreeSet<>(xs);
@@ -557,7 +560,7 @@ public abstract class IntervalTreeContract<
    */
 
   @Property
-  public void testCollectionToArray1(
+  public final void testCollectionToArray1(
     final @ForAll("intervals") List<I> xs)
   {
     final var unique = new TreeSet<>(xs);
@@ -582,7 +585,7 @@ public abstract class IntervalTreeContract<
    */
 
   @Property
-  public void testCollectionToArray2(
+  public final void testCollectionToArray2(
     final @ForAll("intervals") List<I> xs)
   {
     final var unique = new TreeSet<>(xs);
@@ -613,7 +616,7 @@ public abstract class IntervalTreeContract<
    */
 
   @Property
-  public void testCollectionToArray3(
+  public final void testCollectionToArray3(
     final @ForAll("intervals") List<I> xs)
   {
     final var unique = new TreeSet<>(xs);
@@ -638,7 +641,7 @@ public abstract class IntervalTreeContract<
   }
 
   @Property
-  public void testChanges(
+  public final void testChanges(
     final @ForAll IntervalTreeChangeType c0,
     final @ForAll IntervalTreeChangeType c1)
   {
@@ -656,7 +659,7 @@ public abstract class IntervalTreeContract<
    */
 
   @Property
-  public void testMinimumNonEmpty(
+  public final void testMinimumNonEmpty(
     final @ForAll("intervals") List<I> xs)
   {
     Assumptions.assumeFalse(xs.isEmpty());
@@ -680,7 +683,7 @@ public abstract class IntervalTreeContract<
    */
 
   @Property
-  public void testMaximumNonEmpty(
+  public final void testMaximumNonEmpty(
     final @ForAll("intervals") List<I> xs)
   {
     Assumptions.assumeFalse(xs.isEmpty());
@@ -702,7 +705,7 @@ public abstract class IntervalTreeContract<
    */
 
   @Test
-  public void testMinimumEmpty()
+  public final void testMinimumEmpty()
   {
     this.tree = this.create();
 
@@ -717,13 +720,55 @@ public abstract class IntervalTreeContract<
    */
 
   @Test
-  public void testMaximumEmpty()
+  public final void testMaximumEmpty()
   {
     this.tree = this.create();
 
     assertEquals(
       Optional.empty(),
       this.tree.maximum()
+    );
+  }
+
+  /**
+   * Embarassing bug.
+   */
+
+  @Test
+  public final void testProblematicOverlapTicket1()
+  {
+    final var intervals = List.of(
+      this.interval(0L, 41L),
+      this.interval(42L, 1915L),
+      this.interval(1915L, 3657L),
+      this.interval(3657L, 5396L),
+      this.interval(5396L, 6699L),
+      this.interval(6699L, 8238L),
+      this.interval(8238L, 10593L),
+      this.interval(10593L, 12645L),
+      this.interval(12645L, 14885L),
+      this.interval(14885L, 16012L),
+      this.interval(16012L, 19337L),
+      this.interval(19337L, 21869L),
+      this.interval(21869L, 25744L),
+      this.interval(25744L, 28440L),
+      this.interval(28440L, 30062L),
+      this.interval(30062L, 32565L),
+      this.interval(32565L, 35904L),
+      this.interval(35904L, 38703L),
+      this.interval(38703L, 41820L),
+      this.interval(41820L, 44927L),
+      this.interval(44927L, 47841L),
+      this.interval(47841L, 51632L),
+      this.interval(51632L, 51705L)
+    );
+
+    this.tree = this.create();
+    this.tree.addAll(intervals);
+    final var o = this.tree.overlapping(this.interval(0L, 1L));
+    assertEquals(
+      List.of(this.interval(0L, 41L)),
+      List.copyOf(o)
     );
   }
 }
