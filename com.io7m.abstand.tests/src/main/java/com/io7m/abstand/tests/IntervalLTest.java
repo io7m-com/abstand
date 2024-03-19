@@ -21,7 +21,6 @@ import com.io7m.abstand.core.IntervalL;
 import net.jqwik.api.ForAll;
 import net.jqwik.api.Property;
 
-import java.math.BigInteger;
 import java.util.Objects;
 
 import static com.io7m.abstand.core.IntervalComparison.EQUAL;
