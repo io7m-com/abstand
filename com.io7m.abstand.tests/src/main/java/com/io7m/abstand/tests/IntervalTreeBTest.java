@@ -19,7 +19,6 @@ package com.io7m.abstand.tests;
 import com.io7m.abstand.core.IntervalB;
 import com.io7m.abstand.core.IntervalTree;
 import com.io7m.abstand.core.IntervalTreeDebuggableType;
-import com.io7m.abstand.core.IntervalTreeType;
 import net.jqwik.api.Arbitraries;
 import net.jqwik.api.Arbitrary;
 import net.jqwik.api.Provide;
