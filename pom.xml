@@ -27,10 +27,13 @@
   </modules>
 
   <properties>
-    <com.io7m.blackthorne.version>2.0.0</com.io7m.blackthorne.version>
-    <com.io7m.jxtrand.version>2.0.0</com.io7m.jxtrand.version>
+    <!-- Configuration. -->
     <io7m.api.previousVersion>1.0.0-SNAPSHOT</io7m.api.previousVersion>
     <io7m.java.targetJavaVersion>21</io7m.java.targetJavaVersion>
+
+    <!-- io7m dependencies. -->
+    <com.io7m.blackthorne.version>2.0.0</com.io7m.blackthorne.version>
+    <com.io7m.jxtrand.version>2.0.0</com.io7m.jxtrand.version>
   </properties>
 
   <licenses>
@@ -40,10 +43,12 @@
     </license>
   </licenses>
 
+  <inceptionYear>2024</inceptionYear>
+
   <scm>
-    <url>https://www.github.com/io7m/abstand</url>
-    <connection>scm:git:https://github.com/io7m/abstand</connection>
-    <developerConnection>scm:git:https://github.com/io7m/abstand</developerConnection>
+    <url>https://www.github.com/io7m-com/abstand</url>
+    <connection>scm:git:https://www.github.com/io7m-com/abstand</connection>
+    <developerConnection>scm:git:https://www.github.com/io7m-com/abstand</developerConnection>
   </scm>
 
   <developers>
@@ -56,7 +61,7 @@
   </developers>
 
   <issueManagement>
-    <url>https://www.github.com/io7m/abstand/issues</url>
+    <url>https://www.github.com/io7m-com/abstand/issues</url>
     <system>GitHub Issues</system>
   </issueManagement>
 
@@ -78,7 +83,7 @@
 
   <ciManagement>
     <system>GitHub Actions</system>
-    <url>https://www.github.com/io7m/abstand/actions</url>
+    <url>https://www.github.com/io7m-com/abstand/actions</url>
   </ciManagement>
 
   <prerequisites>
