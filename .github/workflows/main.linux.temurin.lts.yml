@@ -39,13 +39,14 @@ jobs:
           path: ./com.io7m.abstand.tests/target/surefire-reports
 
       - name: Coverage
+        if: github.event_name != 'pull_request'
         uses: codecov/codecov-action@v4.3.1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: com.io7m.abstand.tests/target/site/jacoco-aggregate/jacoco.xml
 
       - name: Deploy snapshot
-        if: ${{ steps.project_is_snapshot.outputs.IO7M_PROJECT_VERSION_IS_SNAPSHOT == 'true' }}
+        if: ${{ steps.project_is_snapshot.outputs.IO7M_PROJECT_VERSION_IS_SNAPSHOT == 'true' }} && github.event_name != 'pull_request'
         env:
           MAVEN_CENTRAL_USERNAME: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
           MAVEN_CENTRAL_PASSWORD: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
