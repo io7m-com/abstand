@@ -9,14 +9,14 @@
   <parent>
     <artifactId>com.io7m.abstand</artifactId>
     <groupId>com.io7m.abstand</groupId>
-    <version>1.0.0-beta0002</version>
+    <version>1.0.0</version>
   </parent>
   <artifactId>com.io7m.abstand.core</artifactId>
 
   <packaging>jar</packaging>
   <name>com.io7m.abstand.core</name>
   <description>Interval trees (Core)</description>
-  <url>https://www.github.com/io7m/abstand</url>
+  <url>https://www.io7m.com/software/abstand</url>
 
   <dependencies>
     <dependency>
