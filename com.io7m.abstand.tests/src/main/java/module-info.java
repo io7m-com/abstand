@@ -30,10 +30,11 @@ open module com.io7m.abstand.tests
 
   uses ArbitraryProvider;
 
-  requires transitive org.junit.jupiter.api;
-  requires transitive org.junit.jupiter.engine;
-  requires transitive org.junit.platform.commons;
-  requires transitive org.junit.platform.engine;
+  requires org.junit.jupiter.api;
+  requires org.junit.jupiter.engine;
+  requires org.junit.platform.commons;
+  requires org.junit.platform.engine;
+  requires org.junit.platform.launcher;
 
   exports com.io7m.abstand.tests;
 }

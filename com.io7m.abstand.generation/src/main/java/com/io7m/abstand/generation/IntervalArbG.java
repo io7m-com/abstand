@@ -15,35 +15,37 @@
  */
 
 
-import com.io7m.abstand.generation.IntervalArbB;
-import com.io7m.abstand.generation.IntervalArbG;
-import com.io7m.abstand.generation.IntervalArbD;
-import com.io7m.abstand.generation.IntervalArbI;
-import com.io7m.abstand.generation.IntervalArbL;
-import com.io7m.abstand.generation.IntervalArbTreeChange;
-import net.jqwik.api.providers.ArbitraryProvider;
+package com.io7m.abstand.generation;
+
+import com.io7m.abstand.core.IntervalG;
+import net.jqwik.api.Arbitraries;
+import net.jqwik.api.Combinators;
 
 /**
- * Interval trees (Generation)
+ * Arbitrary provider.
  */
 
-module com.io7m.abstand.generation
+public final class IntervalArbG extends IntervalArbAbstract<IntervalG>
 {
-  requires static org.osgi.annotation.bundle;
-  requires static org.osgi.annotation.versioning;
+  /**
+   * Arbitrary provider.
+   */
 
-  requires com.io7m.abstand.core;
-  requires net.jqwik.api;
-
-  uses ArbitraryProvider;
-
-  exports com.io7m.abstand.generation;
-
-  provides ArbitraryProvider with
-    IntervalArbTreeChange,
-    IntervalArbG,
-    IntervalArbB,
-    IntervalArbL,
-    IntervalArbI,
-    IntervalArbD;
+  public IntervalArbG()
+  {
+    super(
+      IntervalG.class,
+      () -> {
+        return Combinators.combine(
+          Arbitraries.bigIntegers(),
+          Arbitraries.bigIntegers()
+        ).as((x, y) -> {
+          if (x.compareTo(y) <= 0) {
+            return new IntervalG<>(x, y);
+          } else {
+            return new IntervalG<>(y, x);
+          }
+        });
+      });
+  }
 }
