@@ -459,7 +459,15 @@ public final class IntervalTree<S extends Comparable<S>>
     final IntervalType<S> value)
   {
     Objects.requireNonNull(value, "value");
-    return this.findAt(this.root, value);
+    return this.findAt(this.root, value).isPresent();
+  }
+
+  @Override
+  public Optional<IntervalType<S>> findExact(
+    final S lower,
+    final S upper)
+  {
+    return this.findAt(this.root, new IntervalG<>(lower, upper));
   }
 
   @Override
@@ -502,17 +510,17 @@ public final class IntervalTree<S extends Comparable<S>>
     return this.maximumAt(current.right);
   }
 
-  private boolean findAt(
+  private Optional<IntervalType<S>> findAt(
     final Node<S> current,
     final IntervalType<S> interval)
   {
     if (current == null) {
-      return false;
+      return Optional.empty();
     }
 
     return switch (interval.compare(current.interval)) {
       case EQUAL -> {
-        yield true;
+        yield Optional.of(current.interval);
       }
       case LESS_THAN -> {
         yield this.findAt(current.left, interval);

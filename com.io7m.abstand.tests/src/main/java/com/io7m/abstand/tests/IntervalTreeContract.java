@@ -767,4 +767,23 @@ public abstract class IntervalTreeContract<
       List.copyOf(o)
     );
   }
+
+  /**
+   * For every element x inserted into a tree, the element is in the tree.
+   *
+   * @param xs The elements
+   */
+
+  @Property
+  public final void testInsertFindExact(
+    final @ForAll("intervals") List<I> xs)
+  {
+    this.tree = this.create();
+    this.tree.setChangeListener(this::logChange);
+
+    for (final var x : xs) {
+      this.tree.insert(x);
+      assertEquals(x, this.tree.findExact(x.lower(), x.upper()).orElseThrow());
+    }
+  }
 }

@@ -137,6 +137,20 @@ public interface IntervalTreeType<S extends Comparable<S>>
   boolean find(IntervalType<S> value);
 
   /**
+   * Find the interval value in the tree with exactly the given lower and
+   * upper bounds.
+   *
+   * @param lower The lower bound
+   * @param upper The upper bound
+   *
+   * @return The interval, if any
+   */
+
+  Optional<IntervalType<S>> findExact(
+    S lower,
+    S upper);
+
+  /**
    * @return The minimum interval in the set, if any
    */
 
