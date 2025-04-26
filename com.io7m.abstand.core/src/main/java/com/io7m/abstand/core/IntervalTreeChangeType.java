@@ -42,6 +42,9 @@ public sealed interface IntervalTreeChangeType<S extends Comparable<S>>
   {
     /**
      * The tree was rebalanced.
+     *
+     * @param type     The type of rebalance operation
+     * @param interval The interval in the rebalanced node
      */
 
     public Balanced
@@ -70,6 +73,8 @@ public sealed interface IntervalTreeChangeType<S extends Comparable<S>>
   {
     /**
      * A new node was created in the tree.
+     *
+     * @param interval The interval added
      */
 
     public Created
@@ -99,6 +104,9 @@ public sealed interface IntervalTreeChangeType<S extends Comparable<S>>
   {
     /**
      * A node was deleted from the tree.
+     *
+     * @param type     The type of deletion operation
+     * @param interval The interval in the deleted node
      */
 
     public Deleted

@@ -774,34 +774,34 @@ public final class IntervalTree<S extends Comparable<S>>
 
   enum BalanceFactor
   {
-    /*
+    /**
      * The node is completely balanced; both subtrees have the same height.
      */
 
     BALANCED,
 
-    /*
+    /**
      * The node is below the threshold that requires balancing, but the left
      * subtree has a greater height than the right.
      */
 
     BALANCED_LEANING_LEFT,
 
-    /*
+    /**
      * The node is below the threshold that requires balancing, but the right
      * subtree has a greater height than the left.
      */
 
     BALANCED_LEANING_RIGHT,
 
-    /*
+    /**
      * The node is unbalanced and needs balancing. The left subtree has a
      * greater height than the right.
      */
 
     LEFT_HEAVY,
 
-    /*
+    /**
      * The node is unbalanced and needs balancing. The right subtree has a
      * greater height than the left.
      */
